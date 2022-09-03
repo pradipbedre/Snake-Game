@@ -16,11 +16,20 @@
   font-size: 40px;
   font-weight: 1000;
   position: relative;
-  bottom:40vh ;
-  right: 5vw;
+  top: 5vh;
+  bottom: 40vh;
+  right: 2vw;
   font-style: bold;
   border: 5px solid black;
-  padding: 40px;
+  padding: 50px;
+}
+#speedControl1,
+#speedControl2 {
+  padding: 10px;
+  font-size: 40px;
+  margin-left: 10px;
+  border-radius: 10px;
+  background-color: rgb(37, 37, 3);
 }
 
 #board {

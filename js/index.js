@@ -4,10 +4,13 @@ const foodSound = new Audio("music/food.mp3");
 const gameOverSound = new Audio("music/gameover.mp3");
 const moveSound = new Audio("music/move.mp3");
 const musicSound = new Audio("music/music.mp3");
-let speed = 19;
+let speed = 10;
 let score = 0;
 let lastPaintTime = 0;
 let snakeArr = [{ x: 13, y: 15 }];
+let speedview = document.getElementById("speedView");
+let increase = document.getElementById("speedControl1");
+let decrease = document.getElementById("speedControl2");
 
 food = { x: 6, y: 7 };
 
@@ -22,6 +25,14 @@ function main(ctime) {
   gameEngine();
 }
 
+function increaseSpeed() {
+  speed++;
+  speedview.innerHTML = speed;
+}
+function decreaseSpeed() {
+  speed--;
+  speedview.innerHTML = speed;
+}
 function isCollide(snake) {
   // If you bump into yourself
   for (let i = 1; i < snakeArr.length; i++) {
@@ -45,6 +56,9 @@ function isCollide(snake) {
 }
 
 function gameEngine() {
+    increase.disabled = false;
+    decrease.disabled = false;
+
   // Part 1: Updating the snake array & Food
   if (isCollide(snakeArr)) {
     gameOverSound.play();
@@ -59,6 +73,8 @@ function gameEngine() {
   // If you have eaten the food, increment the score and regenerate the food
   if (snakeArr[0].y === food.y && snakeArr[0].x === food.x) {
     foodSound.play();
+    increase.disabled = true;
+    decrease.disabled = true;
     score += 1;
     if (score > hiscoreval) {
       hiscoreval = score;
@@ -80,6 +96,8 @@ function gameEngine() {
 
   // Moving the snake
   for (let i = snakeArr.length - 2; i >= 0; i--) {
+    increase.disabled = true;
+    decrease.disabled = true;
     snakeArr[i + 1] = { ...snakeArr[i] };
   }
 
@@ -119,8 +137,6 @@ if (hiscore === null) {
   hiscoreval = JSON.parse(hiscore);
   hiscoreBox.innerHTML = "HiScore: " + hiscore;
 }
-
-
 
 /* Keyboard buttons and actions manage */
 
